@@ -12,7 +12,8 @@ class AnnouncementsPage extends StatelessWidget {
         "details":
         "Water supply will be interrupted due to maintenance work. Please store enough water in advance.",
         "icon": Icons.water_drop,
-        "color": Colors.blue
+        "color1": Colors.blue.shade400,
+        "color2": Colors.blue.shade700,
       },
       {
         "title": "Yoga Camp",
@@ -20,7 +21,8 @@ class AnnouncementsPage extends StatelessWidget {
         "details":
         "Join our free yoga camp at the community hall. Open to all residents.",
         "icon": Icons.self_improvement,
-        "color": Colors.green
+        "color1": Colors.green.shade400,
+        "color2": Colors.teal.shade600,
       },
       {
         "title": "Electricity Shutdown",
@@ -28,44 +30,55 @@ class AnnouncementsPage extends StatelessWidget {
         "details":
         "Power cut for line maintenance. Backup generators will run for lifts only.",
         "icon": Icons.electric_bolt,
-        "color": Colors.orange
+        "color1": Colors.orange.shade400,
+        "color2": Colors.deepOrange.shade600,
       },
     ];
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: announcements.length,
-      itemBuilder: (context, index) {
-        final item = announcements[index];
-        return Material(
-          borderRadius: BorderRadius.circular(16),
-          elevation: 4,
-          child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Announcements"),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        foregroundColor: Colors.black87,
+      ),
+      backgroundColor: const Color(0xFFF5F7FA),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: announcements.length,
+        itemBuilder: (context, index) {
+          final item = announcements[index];
+          return Container(
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  (item['color'] as Color).withOpacity(0.6),
-                  item['color'] as Color
-                ],
+                colors: [item['color1'] as Color, item['color2'] as Color],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: (item['color2'] as Color).withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(18),
               leading: CircleAvatar(
                 radius: 28,
                 backgroundColor: Colors.white.withOpacity(0.9),
                 child: Icon(item['icon'] as IconData,
-                    size: 30, color: item['color'] as Color),
+                    size: 30, color: Colors.black87),
               ),
               title: Text(
                 item['title'].toString(),
                 style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
                     color: Colors.white),
               ),
               subtitle: Padding(
@@ -74,17 +87,21 @@ class AnnouncementsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(item['date'].toString(),
-                        style: const TextStyle(color: Colors.white70)),
-                    const SizedBox(height: 8),
+                        style: const TextStyle(
+                            fontSize: 13, color: Colors.white70)),
+                    const SizedBox(height: 6),
                     Text(item['details'].toString(),
-                        style: const TextStyle(color: Colors.white)),
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            height: 1.4)),
                   ],
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
