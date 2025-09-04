@@ -24,24 +24,51 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.notifications_active, size: 100, color: Colors.white),
-            SizedBox(height: 20),
-            Text(
-              "Community Notice Board",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+      // Use a gradient background for a fresh look
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.greenAccent, Colors.blueAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Replace the icon with your custom logo if available
+              Icon(
+                Icons.notifications_active,
+                size: 120,
+                color: Colors.white.withOpacity(0.9),
               ),
-            ),
-            SizedBox(height: 15),
-            CircularProgressIndicator(color: Colors.white),
-          ],
+              const SizedBox(height: 20),
+              // Enhance the text with a glowing effect and elegant font styling
+              Text(
+                "Community Notice Board",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white.withOpacity(0.9),
+                  letterSpacing: 1.5,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              // Add a custom loader with a shimmer effect or a unique design
+              CircularProgressIndicator(
+                color: Colors.white.withOpacity(0.7),
+                strokeWidth: 5.0,
+              ),
+            ],
+          ),
         ),
       ),
     );
