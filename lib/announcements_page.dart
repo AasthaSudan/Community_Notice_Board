@@ -49,7 +49,8 @@ class AnnouncementsPage extends StatelessWidget {
         itemCount: announcements.length,
         itemBuilder: (context, index) {
           final item = announcements[index];
-          return Container(
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -98,6 +99,26 @@ class AnnouncementsPage extends StatelessWidget {
                   ],
                 ),
               ),
+              onTap: () {
+                // Show more details in a dialog or a new page
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(item['title'].toString()),
+                      content: Text(item['details'].toString()),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
           );
         },
